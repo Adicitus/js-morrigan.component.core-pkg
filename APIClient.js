@@ -6,6 +6,10 @@ class APIClient {
 
     #coreEnv = null
     #log = null
+    /**
+     * Array of OpenApi specification snippet objects declared by providers.
+     */
+    #openpi = null
 
     /**
      * Middleware to check if the request should be allowed.
@@ -77,6 +81,14 @@ class APIClient {
         })
 
         this.coreEnv.providers = await require('@adicitus/morrigan.utils.providers').setup(router, providers, this.coreEnv)
+        this.openapi = []
+        Object.keys(this.coreEnv.providers).forEach(name => {
+            let provider = this.coreEnv.providers[name]
+            if (provider.openapi) {
+                console.log(provider.openapi)
+                this.openapi.push(provider.openapi)
+            }
+        })
 
     }
 
