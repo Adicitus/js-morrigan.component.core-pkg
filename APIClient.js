@@ -64,7 +64,8 @@ class APIClient {
             settings: settings,
             db: serverEnv.db,
             log: this.log,
-            serverInfo: serverEnv.info
+            serverInfo: serverEnv.info,
+            endpointUrl: definition.endpointUrl
         }
 
         router.use('/', (req, res, next) => {
