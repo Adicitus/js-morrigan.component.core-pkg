@@ -1,9 +1,10 @@
 {
   "name": "@adicitus/morrigan.components.core",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Components containing core/client functionality for the Morrigan management system.",
   "main": "APIClient.js",
   "scripts": {
+    "start": "node ./dev/start.js", 
     "test": "mocha"
   },
   "repository": {
@@ -18,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/Adicitus/js-morrigan.component.core-pkg/issues"
   },
-  "homepage": "https://github.com/Adicitus/js-morrigan.component.core-pkg#readme"
+  "homepage": "https://github.com/Adicitus/js-morrigan.component.core-pkg#readme",
+  "dependencies": {
+    "@adicitus/morrigan.utils.providers": "^1.2.2"
+  },
+  "devDependencies": {
+    "@adicitus/morrigan.server": "^0.7.7"
+  }
 }

@@ -4,19 +4,19 @@
  */
 class APIClient {
 
-    #coreEnv = null
-    #log = null
+    coreEnv = null
+    log = null
     /**
      * Array of OpenApi specification snippet objects declared by providers.
      */
-    #openpi = null
+    openapi = null
 
     /**
      * Middleware to check if the request should be allowed.
      * @param {object} req 
      * @returns {bool} True if:
-     * 1. The request is a SebSocket Upgrade request.
-     * 2. The request isauthenticated as a user with the 'api' authorization in
+     * 1. The request is a WebSocket Upgrade request.
+     * 2. The request is authenticated as a user with the 'api' authorization in
      *    it's function list.
      * Otherwise returns false.
      */
@@ -65,21 +65,20 @@ class APIClient {
             db: serverEnv.db,
             log: this.log,
             serverInfo: serverEnv.info,
-            endpointUrl: definition.endpointUrl
-        }
-
-        router.use('/', (req, res, next) => {
+            endpointUrl: definition.endpointUrl,
+            security: (req, res, next) => {
             
-            if (this._verifyReqAuthentication(req)) {
-                req.core = this.coreEnv
-                next()
-            } else {
-                this.log(`Unauthenticated connection attempt from ${req.connection.remoteAddress}.`)
-                res.status(403)
-                res.end()
-                return
+                if (this._verifyReqAuthentication(req)) {
+                    req.core = this.coreEnv
+                    next()
+                } else {
+                    this.log(`Unauthenticated connection attempt from ${req.connection.remoteAddress}.`)
+                    res.status(403)
+                    res.end()
+                    return
+                }
             }
-        })
+        }
 
         this.coreEnv.providers = await require('@adicitus/morrigan.utils.providers').setup(router, providers, this.coreEnv)
         this.openapi = []
