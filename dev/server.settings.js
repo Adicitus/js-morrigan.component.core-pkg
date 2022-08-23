@@ -65,7 +65,7 @@ module.exports = {
      */
     components: {
         core: {
-            module: require('../APIClient'),
+            module: require('../CoreAPI'),
 
             providers: [
                 '@adicitus/morrigan.server.providers.connection',

@@ -66,6 +66,7 @@ class CoreAPI {
             log: this.log,
             serverInfo: serverEnv.info,
             endpointUrl: definition.endpointUrl,
+            router: router,
             security: (req, res, next) => {
             
                 if (this._verifyReqAuthentication(req)) {
@@ -80,7 +81,7 @@ class CoreAPI {
             }
         }
 
-        this.coreEnv.providers = await require('@adicitus/morrigan.utils.providers').setup(router, providers, this.coreEnv)
+        this.coreEnv.providers = await require('@adicitus/morrigan.utils.providers').setup(providers, this.coreEnv)
         this.openapi = []
         Object.keys(this.coreEnv.providers).forEach(name => {
             let provider = this.coreEnv.providers[name]
@@ -109,4 +110,4 @@ class CoreAPI {
     }
 }
 
-module.exports = new APIClient()
+module.exports = new CoreAPI()
