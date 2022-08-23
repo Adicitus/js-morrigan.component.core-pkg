@@ -2,7 +2,7 @@
 /**
  * Class containing the extensible core functionality of Morrigan.
  */
-class APIClient {
+class CoreAPI {
 
     coreEnv = null
     log = null
