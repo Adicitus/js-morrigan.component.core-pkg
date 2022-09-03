@@ -47,7 +47,6 @@ class CoreAPI {
      * @param {object} definition Object containing the definition for this component, expected to contain a list of providers to load.
      * @param {object} router - The express router to set up endpoints on. This is expected to be a express-ws router.
      * @param {object} serverEnv - Server environment, expected to contain:
-     *  + settings: The server settings object.
      *  + log: The log function to use.
      *  + db: The database used by the server.
      *  + info: Server info.
@@ -56,12 +55,9 @@ class CoreAPI {
 
         let providers = definition.providers
 
-        let settings = serverEnv.settings
-
         this.log = serverEnv.log
 
         this.coreEnv = {
-            settings: settings,
             db: serverEnv.db,
             log: this.log,
             serverInfo: serverEnv.info,
