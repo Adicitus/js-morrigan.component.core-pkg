@@ -44,12 +44,15 @@ class CoreAPI {
      * Used to set up core functionality.
      * 
      * @param {string} name - Name that this component will registered under.
-     * @param {object} definition Object containing the definition for this component, expected to contain a list of providers to load.
+     * @param {object} definition Object containing the definition for this component, expected to contain:
+     *  + providers: A list of providers to load.
+     *  + endpointUrl: Relative URL path to this component.
      * @param {object} router - The express router to set up endpoints on. This is expected to be a express-ws router.
      * @param {object} serverEnv - Server environment, expected to contain:
      *  + log: The log function to use.
      *  + db: The database used by the server.
      *  + info: Server info.
+     *  + state: A StateStore object that this component can use to allocate stores for it's providers
      */
     async setup(name, definition, router, serverEnv) {
 
@@ -63,6 +66,7 @@ class CoreAPI {
             serverInfo: serverEnv.info,
             endpointUrl: definition.endpointUrl,
             router: router,
+            state: serverEnv.state,
             security: (req, res, next) => {
             
                 if (this._verifyReqAuthentication(req)) {

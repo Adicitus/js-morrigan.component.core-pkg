@@ -1,6 +1,6 @@
 {
   "name": "@adicitus/morrigan.components.core",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "Components containing core/client functionality for the Morrigan management system.",
   "main": "CoreAPI.js",
   "scripts": {
@@ -24,6 +24,6 @@
     "@adicitus/morrigan.utils.providers": "^2.0.0"
   },
   "devDependencies": {
-    "@adicitus/morrigan.server": "^0.7.11"
+    "@adicitus/morrigan.server": "^0.9.1"
   }
 }
